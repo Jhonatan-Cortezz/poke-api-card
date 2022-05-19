@@ -1,8 +1,16 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+  loadData()
+  window.setInterval(() => {
+    clearBox()
+    loadData()
+  }, 3000)
+})
+
+const loadData = () => {
   const ramdomNumber = getRamdomInit(1, 151)
   getDataFromPokeAPI(ramdomNumber)
-})
+}
 
 const getRamdomInit = (min, max) => {
   return Math.floor(Math.random() * (max -min)) + min;
@@ -28,9 +36,11 @@ const getDataFromPokeAPI = async (idPokemon) => {
   }
 }
 
+const clearBox = () =>{
+  document.querySelector('.flex').innerHTML = ""
+}
 
 const printCardHTML = (pokemon) => {
-  console.log(pokemon);
   const showTemplateInMain = document.getElementsByClassName('flex')[0]
   const template = document.getElementById('template-card').content
   const cloneTemplate = template.cloneNode(true)
